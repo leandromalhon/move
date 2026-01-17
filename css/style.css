@@ -1,0 +1,749 @@
+/* ========================================
+   MOVE CENTRO DE SAÚDE E ESTÉTICA
+   Stylesheet Principal - VERSÃO PROFISSIONAL
+   Desenvolvido com excelência técnica ⚡
+   ======================================== */
+
+/* ========================================
+   RESET E CONFIGURAÇÕES GLOBAIS
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cores Principais */
+    --color-primary: #4ECDC4;
+    --color-primary-dark: #3db8af;
+    --color-primary-light: #6dd9d1;
+    --color-primary-glow: rgba(78, 205, 196, 0.4);
+    
+    /* Cores Secundárias (Cinza) */
+    --color-gray: #DBDBDD;
+    --color-gray-hover: #CECFD1;
+    --color-gray-text: #5A5A5C;
+    
+    /* Cores de Fundo */
+    --color-bg-main: #4ECDC4;
+    --color-bg-card: #FFFFFF;
+    --color-bg-gradient: linear-gradient(135deg, #4ECDC4 0%, #44B8B0 100%);
+    
+    /* Cores de Texto */
+    --color-text-primary: #2D3436;
+    --color-text-secondary: #636E72;
+    --color-text-light: #B2BEC3;
+    --color-text-white: #FFFFFF;
+    
+    /* Tipografia */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Espaçamentos Profissionais */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-full: 50px;
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+    
+    /* Transições */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.4s ease;
+}
+
+/* ========================================
+   ESTILOS BASE
+   ======================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--color-bg-gradient);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Logo Flutuante no Fundo */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: url("../assets/move-fundo.png") no-repeat center;
+    background-size: contain;
+    opacity: 0.04;
+    z-index: 0;
+    pointer-events: none;
+    animation: driftLogo 80s linear infinite;
+    filter: blur(0.5px);
+}
+
+@keyframes driftLogo {
+    0% { 
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        opacity: 0.04;
+    }
+    25% { 
+        transform: translate(-40%, -45%) rotate(90deg) scale(1.03);
+        opacity: 0.03;
+    }
+    50% { 
+        transform: translate(-60%, -55%) rotate(180deg) scale(1);
+        opacity: 0.04;
+    }
+    75% { 
+        transform: translate(-45%, -50%) rotate(270deg) scale(0.97);
+        opacity: 0.03;
+    }
+    100% { 
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+        opacity: 0.04;
+    }
+}
+
+/* ========================================
+   LOADER / TELA DE CARREGAMENTO
+   ======================================== */
+
+.loader {
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: loaderFade 1.2s ease forwards;
+    animation-delay: 1s;
+}
+
+.loader img {
+    width: 130px;
+    animation: loaderPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes loaderPulse {
+    0% { 
+        transform: scale(1); 
+        opacity: 0.6;
+    }
+    50% { 
+        transform: scale(1.04); 
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(1); 
+        opacity: 0.6;
+    }
+}
+
+@keyframes loaderFade {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+/* ========================================
+   CONTAINER E CARD PRINCIPAL
+   ======================================== */
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 28px 36px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 1.5s;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   CABEÇALHO - ESPAÇAMENTOS PROFISSIONAIS
+   ======================================== */
+
+.logo {
+    width: 50%;
+    max-width: 480px;
+    margin: 0 auto 18px;
+    display: block;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: fadeInScale 0.8s ease forwards;
+    animation-delay: 1.7s;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Slogan como Imagem - Proporcional e Elegante */
+.slogan-img {
+    width: 50%;
+    max-width: 450px;
+    height: auto;
+    margin: 0 auto 14px;
+    display: block;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 1.9s;
+}
+
+.subtitle {
+    color: var(--color-text-secondary);
+    margin: 0 auto 36px;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 2.1s;
+    font-weight: var(--font-weight-medium);
+    max-width: 90%;
+}
+
+/* ========================================
+   CARDS DE LINKS
+   ======================================== */
+
+.links {
+    display: grid;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 2.3s;
+}
+
+/* Card Base (Cinza) */
+.card {
+    background: var(--color-gray);
+    padding: 16px 18px;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    color: var(--color-gray-text);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 1rem;
+    transition: all var(--transition-base);
+    opacity: 0;
+    transform: translateY(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:nth-child(1) { animation: fadeInUp 0.8s ease forwards 2.5s; }
+.card:nth-child(2) { animation: fadeInUp 0.8s ease forwards 2.7s; }
+.card:nth-child(3) { animation: fadeInUp 0.8s ease forwards 2.9s; }
+.card:nth-child(4) { animation: fadeInUp 0.8s ease forwards 3.1s; }
+.card:nth-child(5) { animation: fadeInUp 0.8s ease forwards 3.3s; }
+
+.card:hover {
+    background: var(--color-gray-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.card .icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(36%) sepia(0%) saturate(0%) hue-rotate(204deg) brightness(96%) contrast(92%);
+    position: relative;
+    z-index: 2;
+}
+
+.card span {
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================
+   CARD WHATSAPP COM EFEITO DEGRADÊ PULSANTE
+   ======================================== */
+
+.card-whatsapp {
+    background: var(--color-primary);
+    color: var(--color-text-white);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+    font-size: 1.05rem;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease forwards 2.5s;
+}
+
+/* Degradê Pulsante de Fundo */
+.card-whatsapp::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.15) 40%, 
+        transparent 70%
+    );
+    border-radius: var(--radius-full);
+    transform: translate(-50%, -50%) scale(0);
+    animation: pulseGradient 2s ease-in-out infinite;
+    animation-delay: 3.5s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes pulseGradient {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+}
+
+/* Brilho Sutil que Pulsa */
+.card-whatsapp::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: shimmer 3s ease-in-out infinite;
+    animation-delay: 3.5s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    50%, 100% {
+        left: 100%;
+    }
+}
+
+.card-whatsapp:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 40px rgba(78, 205, 196, 0.5);
+}
+
+.card-whatsapp:hover::before,
+.card-whatsapp:hover::after {
+    animation-play-state: paused;
+}
+
+.card-whatsapp:active {
+    transform: translateY(-1px) scale(0.98) !important;
+}
+
+.card-whatsapp .icon {
+    filter: brightness(0) invert(1);
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+}
+
+/* ========================================
+   GALERIA DE IMAGENS
+   ======================================== */
+
+.structure-section {
+    margin-top: 48px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 3.7s;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.image-gallery {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.gallery-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    transition: opacity var(--transition-base);
+}
+
+.gallery-image.active {
+    display: block;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    transition: all var(--transition-fast);
+    z-index: 10;
+    box-shadow: var(--shadow-md);
+    user-select: none;
+}
+
+.gallery-nav:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav.prev {
+    left: var(--spacing-sm);
+}
+
+.gallery-nav.next {
+    right: var(--spacing-sm);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.footer {
+    margin-top: 48px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 3.9s;
+}
+
+.footer-text {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 6px;
+}
+
+.footer-location {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-weight: var(--font-weight-regular);
+}
+
+/* ========================================
+   RESPONSIVIDADE MOBILE
+   ======================================== */
+
+@media (max-width: 480px) {
+    body {
+        padding: var(--spacing-md);
+    }
+    
+    body::before {
+        width: 150px;
+        height: 150px;
+        opacity: 0.03;
+        animation: driftLogo 100s linear infinite;
+    }
+    
+    .container {
+        padding: 32px 20px 28px;
+        max-width: 100%;
+        animation-delay: 1s;
+    }
+    
+    .logo {
+        width: 92%;
+        max-width: 100%;
+        margin-bottom: 14px;
+        animation-delay: 1.2s;
+    }
+    
+    .slogan-img {
+        width: 85%;
+        max-width: 100%;
+        margin-bottom: 12px;
+        animation-delay: 1.4s;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 28px;
+        animation-delay: 1.6s;
+        max-width: 95%;
+    }
+    
+    .links {
+        gap: 14px;
+        animation-delay: 1.8s;
+    }
+    
+    .card {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+        gap: 12px;
+    }
+    
+    .card-whatsapp {
+        padding: 16px;
+        font-size: 1rem;
+    }
+    
+    .card:nth-child(1) { animation-delay: 2s; }
+    .card:nth-child(2) { animation-delay: 2.2s; }
+    .card:nth-child(3) { animation-delay: 2.4s; }
+    .card:nth-child(4) { animation-delay: 2.6s; }
+    .card:nth-child(5) { animation-delay: 2.8s; }
+    
+    .card .icon {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+    }
+    
+    .card-whatsapp .icon {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+    }
+    
+    /* Animações mais suaves no mobile */
+    .card-whatsapp::before {
+        animation-delay: 3s;
+    }
+    
+    .card-whatsapp::after {
+        animation-delay: 3s;
+    }
+    
+    @keyframes pulseGradient {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0.8;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(2.5);
+            opacity: 0;
+        }
+    }
+    
+    .structure-section {
+        margin-top: 36px;
+        animation-delay: 3s;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+        margin-bottom: 14px;
+    }
+    
+    .gallery-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 1.25rem;
+    }
+    
+    .footer {
+        margin-top: 36px;
+        animation-delay: 3.2s;
+    }
+    
+    .footer-text {
+        font-size: 0.8rem;
+    }
+    
+    .footer-location {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo {
+        width: 95%;
+    }
+    
+    .slogan-img {
+        width: 88%;
+    }
+    
+    .card span {
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    body::before {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+/* ========================================
+   ACESSIBILIDADE
+   ======================================== */
+
+/* Foco visível para navegação por teclado */
+.card:focus-visible,
+.gallery-nav:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+/* Remove outline padrão mas mantém para teclado */
+.card:focus:not(:focus-visible),
+.gallery-nav:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Redução de movimento para usuários que preferem */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    /* Mantém apenas a animação de entrada */
+    .card-whatsapp {
+        animation: fadeInUp 0.8s ease forwards 2.5s !important;
+    }
+    
+    .card-whatsapp::before,
+    .card-whatsapp::after {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   UTILITÁRIOS
+   ======================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
